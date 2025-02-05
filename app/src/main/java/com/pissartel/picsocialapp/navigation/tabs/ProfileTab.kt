@@ -25,6 +25,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
@@ -36,6 +38,7 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import coil.compose.rememberAsyncImagePainter
+import com.pissartel.designsystem.theme.bulmaColors
 import com.pissartel.detail.mapItemDetailScreen
 import com.pissartel.detail.navigateToMapPictureDetail
 import com.pissartel.domain.usecase.GetProfilePictureUseCase
@@ -133,8 +136,12 @@ fun RowScope.ProfileTabNavigationItem(
                 .padding(40.dp)
                 .clip(CircleShape)
                 .border(
-                    width = 2.dp,
-                    color = if (selected) colors.selectedIconColor else Color.Transparent,
+                    width = if(selected) 2.dp else 0.dp,
+                    brush = Brush.linearGradient(
+                        colors = listOf(bulmaColors.pink, bulmaColors.cyan),
+                        start = Offset(0f, 0f), // Top-left corner
+                        end = Offset(100f, 100f) // Bottom-right corner
+                    ),
                     shape = CircleShape
                 ),
             painter = icon,
