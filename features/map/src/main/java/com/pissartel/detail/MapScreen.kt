@@ -66,8 +66,8 @@ import java.io.File
 @RequiresApi(Build.VERSION_CODES.FROYO)
 @Composable
 internal fun MapScreenRoute(
+    onNavigateToDetail: (String) -> Unit,
     viewModel: MapViewModel = hiltViewModel(),
-    onMapItemClick: (MapItem) -> Unit
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -117,7 +117,7 @@ internal fun MapScreenRoute(
     MapScreen(
         state,
         onMapItemLikeClick = { viewModel.toggleLike(it) },
-        onMapItemClick = onMapItemClick,
+        onMapItemClick = { onNavigateToDetail(it.id) },
         onCameraClick = {
             scope.launch {
                 val hasPermission = ContextCompat.checkSelfPermission(

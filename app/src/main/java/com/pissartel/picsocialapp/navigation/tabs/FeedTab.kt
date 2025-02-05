@@ -11,6 +11,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.pissartel.detail.mapItemDetailScreen
 import com.pissartel.detail.mapScreenRoute
+import com.pissartel.detail.navigateToMapPictureDetail
 import com.pissartel.repolist.feedScreen
 import com.pissartel.repolist.feedScreenRoute
 
@@ -37,7 +38,9 @@ object FeedTab : Tab {
             navController = navController,
             startDestination = feedScreenRoute,
         ) {
-            feedScreen(navController)
+            feedScreen {
+                navController.navigateToMapPictureDetail(it)
+            }
             mapItemDetailScreen()
         }
     }

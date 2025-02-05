@@ -6,7 +6,6 @@ android {
     namespace = "com.pissartel.profile"
 }
 
-dependencies{
+dependencies {
     implementation(libs.image.coil.compose)
-    implementation(project(":features:detail"))
 }

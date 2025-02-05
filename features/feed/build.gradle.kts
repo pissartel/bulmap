@@ -8,5 +8,4 @@ android {
 }
 dependencies{
     implementation(libs.image.coil.compose)
-    implementation(project(":features:detail"))
 }

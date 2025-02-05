@@ -22,8 +22,8 @@ import com.pissartel.ui.component.MapItem
 
 @Composable
 internal fun FeedRoute(
+    onNavigateToDetail: (String) -> Unit,
     viewModel: FeedViewModel = hiltViewModel(),
-    onNavigateToDetail: (String) -> Unit
 ) {
     val repoListUiSate by viewModel.state.collectAsStateWithLifecycle()
 

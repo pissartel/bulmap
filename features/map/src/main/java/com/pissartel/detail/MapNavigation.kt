@@ -10,8 +10,8 @@ fun NavController.navigateToMapScreen() {
     navigate(mapScreenRoute)
 }
 
-fun NavGraphBuilder.mapScreen(navController: NavController) {
+fun NavGraphBuilder.mapScreen(onNavigateToDetail: (String) -> Unit) {
     composable(route = mapScreenRoute) {
-        MapScreenRoute() { navController.navigateToMapPictureDetail(it.id) }
+        MapScreenRoute(onNavigateToDetail=onNavigateToDetail)
     }
 }

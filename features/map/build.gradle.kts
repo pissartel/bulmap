@@ -10,5 +10,4 @@ dependencies {
     implementation(libs.map.compose)
     implementation(libs.maps.location)
     implementation(libs.image.coil.compose)
-    implementation(project(":features:detail"))
 }

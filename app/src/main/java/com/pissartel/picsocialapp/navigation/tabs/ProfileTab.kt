@@ -37,6 +37,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import coil.compose.rememberAsyncImagePainter
 import com.pissartel.detail.mapItemDetailScreen
+import com.pissartel.detail.navigateToMapPictureDetail
 import com.pissartel.domain.usecase.GetProfilePictureUseCase
 import com.pissartel.detail.profileScreen
 import com.pissartel.detail.profileScreenRoute
@@ -67,7 +68,9 @@ object ProfileTab : Tab {
             navController = navController,
             startDestination = profileScreenRoute,
         ) {
-            profileScreen(navController)
+            profileScreen {
+                navController.navigateToMapPictureDetail(it)
+            }
             mapItemDetailScreen()
         }
     }
@@ -133,8 +136,7 @@ fun RowScope.ProfileTabNavigationItem(
                     width = 2.dp,
                     color = if (selected) colors.selectedIconColor else Color.Transparent,
                     shape = CircleShape
-                )
-            ,
+                ),
             painter = icon,
             contentDescription = "",
             contentScale = ContentScale.Crop,

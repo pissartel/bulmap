@@ -34,13 +34,13 @@ import com.pissartel.designsystem.theme.LocaleBulmaColors
 
 @Composable
 internal fun ProfileScreenRoute(
+    onNavigateToDetail: (String) -> Unit,
     viewModel: ProfileViewModel = hiltViewModel(),
-    onMapPictureClick: (String) -> Unit
 ) {
     val profileUiState by viewModel.state.collectAsState()
 
     ProfileScreen(
-        profileUiState = profileUiState, onMapPictureClick
+        profileUiState = profileUiState, onNavigateToDetail
     )
 }
 

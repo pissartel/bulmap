@@ -10,9 +10,10 @@ fun NavController.navigateToProfileScreen() {
     navigate(profileScreenRoute)
 }
 
-fun NavGraphBuilder.profileScreen(navController: NavController) {
+fun NavGraphBuilder.profileScreen(
+    onNavigateToDetail: (String) -> Unit
+) {
     composable(route = profileScreenRoute) {
-        ProfileScreenRoute(
-        ) { navController.navigateToMapPictureDetail(it) }
+        ProfileScreenRoute(onNavigateToDetail = onNavigateToDetail)
     }
 }
