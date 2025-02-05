@@ -51,6 +51,7 @@ import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -145,6 +146,8 @@ private fun MapScreen(
     onMapItemClick: (MapItem) -> Unit,
     onCameraClick: () -> Unit
 ) {
+    val scope = rememberCoroutineScope()
+
     val userLocation by remember(state.userLocation) {
         derivedStateOf {
             LatLng(state.userLocation.latitude, state.userLocation.longitude)
@@ -173,12 +176,20 @@ private fun MapScreen(
                     color = bulmaColors.cyan,
                     onLikeClick = { onMapItemLikeClick(mapItemEntity.id) }
                 ) {
-                    cameraPositionState.position = CameraPosition.fromLatLngZoom(
-                        LatLng(
-                            mapItemEntity.latitude,
-                            mapItemEntity.longitude
-                        ), 14f
-                    )
+                    scope.launch {
+                        cameraPositionState.animate(
+                            update = CameraUpdateFactory.newCameraPosition(
+                                CameraPosition(
+                                    LatLng(
+                                        mapItemEntity.latitude,
+                                        mapItemEntity.longitude
+                                    ), 14f, 0f, 0f
+                                )
+                            ),
+                            durationMs = 300
+                        )
+                    }
+
                     if (selectedMapItemId == mapItemEntity.id) {
                         onMapItemClick(mapItemEntity)
                     } else {
@@ -205,7 +216,12 @@ private fun MapScreen(
     }
 
     LaunchedEffect(userLocation) {
-        cameraPositionState.position = CameraPosition.fromLatLngZoom(userLocation, 14f)
+        cameraPositionState.animate(
+            update = CameraUpdateFactory.newCameraPosition(
+                CameraPosition(userLocation, 14f, 0f, 0f)
+            ),
+            durationMs = 300
+        )
     }
 }
 
